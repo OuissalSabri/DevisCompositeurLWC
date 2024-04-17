@@ -1,0 +1,31 @@
+<template>
+    <template if:true={showAddFormButton}>
+        <div class="slds-align_absolute-center">
+            <lightning-button class="custom-green-button" label="Ajouter un élément de devis" variant="success" onclick={displayAddForm}></lightning-button>
+        </div>
+    </template>
+<template if:true={showAddForm}>
+    <div class="slds-box">
+                <h2 class="slds-text-heading_small">Ajouter un élément de devis</h2>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <lightning-select label="NomProduit" options={productOptions} value={selectedProductId} onchange={handleProductNameChange}></lightning-select>
+                    </div>
+                    
+                    <div class="slds-col">
+                        <lightning-input type="number" label="Remise" value={discount} onchange={handleInputChangeAddItemQuote} name="discount"></lightning-input>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-input type="number" label="Quantité" value={quantity} onchange={handleInputChangeAddItemQuote} name="quantity"></lightning-input>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-input type="number" label="PrixUnitaire" value={unitPrice} onchange={handleInputChangeAddItemQuote} name="unitPrice"></lightning-input>
+                    </div>
+                </div>
+                <div class="slds-align_absolute-center">
+                    <lightning-button class="custom-green-button" label="Ajouter" variant="success" onclick={handleAdd}></lightning-button>
+                    <lightning-button class="custom-purple-button" label="Annuler" variant="brand" onclick={hideAddForm}></lightning-button>
+                </div>
+            </div>
+</template>
+</template>

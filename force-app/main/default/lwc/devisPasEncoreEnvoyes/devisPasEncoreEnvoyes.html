@@ -1,0 +1,114 @@
+<template>
+    <lightning-card class="card-title">
+        <h1 class="big-title">Les Devis Pas Encore Envoyés</h1>
+        <div class="custom-label">
+            Choisir un devis
+        </div>
+        <lightning-combobox
+            name="progress"
+           
+            value={value}
+            placeholder="Choisir un devis"
+            options={options}
+            onchange={handleChange}>
+        </lightning-combobox>
+       <!-- <template if:true={showAddFormButton}>
+            <div class="slds-align_absolute-center">
+                <lightning-button class="custom-green-button" label="Ajouter un élément de ligne de devis" variant="success" onclick={displayAddForm}></lightning-button>
+            </div>
+        </template> --> 
+        <c-add-New-quote-line-item value={value} wired-quote-items-result={wiredQuoteItemsResult} show-add-form-button={showAddFormButton}></c-add-New-quote-line-item>
+
+        <!-- Form for adding new Quote Line Item --> 
+        <!-- <template if:true={showAddForm}>
+           <div class="slds-box">
+                <h2 class="slds-text-heading_small">Ajouter un élément de ligne de devis</h2>
+                <div class="slds-grid slds-gutters">
+                    <div class="slds-col">
+                        <lightning-select label="Product Name" options={productOptions} value={selectedProductId} onchange={handleProductNameChange}></lightning-select>
+                    </div>
+                    
+                    <div class="slds-col">
+                        <lightning-input type="number" label="Discount" value={discount} onchange={handleInputChangeAddItemQuote} name="discount"></lightning-input>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-input type="number" label="Quantity" value={quantity} onchange={handleInputChangeAddItemQuote} name="quantity"></lightning-input>
+                    </div>
+                    <div class="slds-col">
+                        <lightning-input type="number" label="Unit Price" value={unitPrice} onchange={handleInputChangeAddItemQuote} name="unitPrice"></lightning-input>
+                    </div>
+                </div>
+                <div class="slds-align_absolute-center">
+                    <lightning-button class="custom-green-button" label="Ajouter" variant="success" onclick={handleAdd}></lightning-button>
+                    <lightning-button class="custom-purple-button" label="Annuler" variant="brand" onclick={hideAddForm}></lightning-button>
+                </div>
+            </div>
+        </template>-->
+        <template if:true={allquoteLinesItems}>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr>
+                        <th>NomProduit</th>
+                        <th>PrixListe</th>
+                        <th>Remise</th>
+                        <th>Quantité</th>
+                        <th>PrixUnitaire</th>
+                        <th>PrixTotal</th>
+                        <th>SousTotal</th>
+                        <th>Actions</th>
+                    </tr>
+                    
+                </thead>
+                <tbody>
+                    <template for:each={allquoteLinesItems} for:item="quoteItem" for:index="index">
+                        <tr key={quoteItem.Id}>
+
+                            <td>{quoteItem.Product2.Name}</td>
+                            <td>{quoteItem.ListPriceFormatted}</td>
+                            <td>
+                                <template if:true={quoteItem.editable}>
+                                    <lightning-input data-id={quoteItem.Id} name="Discount" value={quoteItem.Discount} onchange={handleInputChange}></lightning-input>
+                                </template>
+                                <template if:false={quoteItem.editable}>
+                                    {quoteItem.DiscountFormatted}
+                                </template>
+                            </td>
+                            <td>
+                                <template if:true={quoteItem.editable}>
+                                    <lightning-input data-id={quoteItem.Id} name="Quantity" value={quoteItem.Quantity} onchange={handleInputChange}></lightning-input>
+                                </template>
+                                <template if:false={quoteItem.editable}>
+                                    {quoteItem.Quantity}
+                                </template>
+                            </td>
+
+                            <td>
+                                <template if:true={quoteItem.editable}>
+                                    <lightning-input data-id={quoteItem.Id} name="UnitPrice" value={quoteItem.UnitPrice} onchange={handleInputChange}></lightning-input>
+                                </template>
+                                <template if:false={quoteItem.editable}>
+                                    {quoteItem.UnitPriceFormatted}
+                                </template>
+                            </td>
+
+                            <td>{quoteItem.TotalPriceFormatted}</td>
+                            <td>{quoteItem.SubtotalFormatted}</td>
+                            <td>
+                                <lightning-button-group>
+                                    <lightning-button class="custom-purple-button" label="Modifier" data-id={quoteItem.Id} variant="brand" onclick={handleModify}></lightning-button>
+                                    <lightning-button class="custom-black-button" label="Cloner" variant="brand" onclick={handleClone} data-id={quoteItem.Id}></lightning-button>
+                                    <lightning-button class="custom-red-button" label="Supprimer" variant="destructive" onclick={handleDelete} data-id={quoteItem.Id}></lightning-button>
+                                </lightning-button-group>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </template> 
+         
+         <div class="slds-align_absolute-center">
+            <lightning-button class="custom-green-button" label="Enregistrer" variant="success" onclick={handleSave}></lightning-button>
+        </div>
+
+    </lightning-card>
+</template>

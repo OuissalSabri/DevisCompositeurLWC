@@ -1,0 +1,53 @@
+
+.slds-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #d3d3d3;
+}
+
+.slds-table th, .slds-table td {
+    padding: 8px;
+    border: 1px solid #d3d3d3;
+}
+
+.slds-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: left;
+}
+
+.slds-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+ 
+.slds-table tbody tr:hover {
+    background-color: #ddd;
+}
+
+  
+.big-title {
+    font-size: 1.2rem;
+    text-align: center;
+    color: blueviolet;
+    padding-bottom: 4px; 
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+
+.custom-label {
+    color: #6527BE; 
+    font-size: 1rem; 
+    font-weight: bold; 
+    margin-bottom: 8px;
+    margin-left: 10px; 
+}
+
+
+
+
+.custom-purple-button{
+    --sds-c-button-brand-color-background : #6527BE;
+    --sds-c-button-brand-color-border : #6527BE;
+}
+
+
